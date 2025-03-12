@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Das Lustige Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        #quiz, #surprise {
+            display: none;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Willkommen zum lustigsten Quiz aller Zeiten!</h1>
+    <button onclick="startQuiz()">Los geht’s!</button>
+    
+    <div id="quiz">
+        <p id="question">Frage wird hier erscheinen</p>
+        <button onclick="nextQuestion(1)">Antwort 1</button>
+        <button onclick="nextQuestion(2)">Antwort 2</button>
+    </div>
+    
+    <div id="surprise">
+        <h2>🎉 Überraschung! 🎉</h2>
+        <p>Wir fliegen nach Disneyland Paris! 🏰✨</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Sleeping_Beauty_Castle%2C_Disneyland%2C_Paris.jpg/800px-Sleeping_Beauty_Castle%2C_Disneyland%2C_Paris.jpg" alt="Disneyland Paris" width="80%">
+    </div>
+    
+    <script>
+        let questions = [
+            { q: "Was ist die Hauptstadt von Frankreich?", a1: "Paris", a2: "London" },
+            { q: "Was ist das beste Freizeitpark-Erlebnis?", a1: "Achterbahnen!", a2: "Riesenrad!" },
+            { q: "Was ist deine Lieblings Disney-Figur?", a1: "Mickey Mouse", a2: "Donald Duck" }
+        ];
+        let currentQuestion = 0;
+
+        function startQuiz() {
+            document.querySelector("h1").style.display = "none";
+            document.querySelector("button").style.display = "none";
+            document.getElementById("quiz").style.display = "block";
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            if (currentQuestion < questions.length) {
+                document.getElementById("question").textContent = questions[currentQuestion].q;
+                let buttons = document.getElementById("quiz").getElementsByTagName("button");
+                buttons[0].textContent = questions[currentQuestion].a1;
+                buttons[1].textContent = questions[currentQuestion].a2;
+            } else {
+                document.getElementById("quiz").style.display = "none";
+                document.getElementById("surprise").style.display = "block";
+            }
+        }
+
+        function nextQuestion(answer) {
+            currentQuestion++;
+            loadQuestion();
+        }
+    </script>
+</body>
+</html>
